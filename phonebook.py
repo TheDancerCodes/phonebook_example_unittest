@@ -15,3 +15,7 @@ class Phonebook:
     def lookup(self, name):
         """Method that looks up a name in the phonebook."""
         return self.entries[name]
+
+    def is_consistent(self):
+        """Method that ascertains whether the phone is consistent."""
+        return True
