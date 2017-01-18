@@ -24,3 +24,34 @@ class PhonebookTest(unittest.TestCase):
     def test_empty_phonebook_is_consistent(self):
         """Test Case that check that empty phonebook is consistent."""
         self.assertTrue(self.phonebook.is_consistent())
+
+    @unittest.skip("poor example")
+    def test_is_consistent(self):
+        """Test Case to check that enties are consistent."""
+        self.assertTrue(self.phonebook.is_consistent())
+        self.phonebook.add("Bob", "12345")
+        self.assertTrue(self.phonebook.is_consistent())
+        self.phonebook.add("Mary", "012345")
+        self.assertTrue(self.phonebook.is_consistent())
+        self.phonebook.add("Sue", "12345") # identical to Bob
+        self.assertTrue(self.phonebook.is_consistent())
+        self.phonebook.add("Sue", "123") # prefix of Bob
+        self.assertTrue(self.phonebook.is_consistent())
+
+    def test_phonebook_with_normal_entries_is_consistent(self):
+        """Test Case to check that enties are consistent."""
+        self.phonebook.add("Bob", "12345")
+        self.phonebook.add("Mary", "012345")
+        self.assertTrue(self.phonebook.is_consistent())
+
+    def test_phonebook_with_duplicate_entries_is_inconsostent(self):
+        """Test Case to check that duplicate enties are inconsistent."""
+        self.phonebook.add("Bob", "12345")
+        self.phonebook.add("Mary", "12345")
+        self.assertFalse(self.phonebook.is_consistent())
+
+    def test_phonebook_with_numbers_that_prefix_one_another_is_inconsistent(self):
+        """Test Case to check that numbers prefixing each other are inconsistent."""
+        self.phonebook.add("Bob", "12345")
+        self.phonebook.add("Mary", "123")
+        self.assertFalse(self.phonebook.is_consistent())
