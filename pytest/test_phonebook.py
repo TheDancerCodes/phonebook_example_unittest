@@ -1,9 +1,11 @@
 """This file contains test cases for the phonebook app."""
+import pytest
 
 from phonebook import Phonebook
 
 def test_add_and_lookp_entry():
     """Test case that adds entry to phonebook & looks up an entry by name."""
+    # pytest.skip("WIP")
     phonebook = Phonebook()
     phonebook.add("Bob", "123")
     assert "123" == phonebook.lookup("Bob")
@@ -23,3 +25,9 @@ def test_phonebook_gives_access_to_names_and_numbers():
     phonebook.add("Bob", "123")
     assert set(phonebook.names()) == {"Alice", "Bob"}
     assert set(phonebook.numbers()) == {"12345", "123"}
+
+def test_missing_entry_raises_KeyError():
+    """Test case that raises KeyError for a missng entry."""
+    phonebook = Phonebook()
+    with pytest.raises(KeyError):
+        phonebook.lookup("missing")
