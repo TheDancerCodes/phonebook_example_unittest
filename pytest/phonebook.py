@@ -4,11 +4,11 @@ import os
 class Phonebook():
     """Phonebook Class."""
 
-    def __init__(self):
+    def __init__(self, cachedir):
         """The constructor for the Phonebook class."""
         self.entries = {}
         self.filename = "phonebook.txt"
-        self.file_cache = open(self.filename, "w")
+        self.file_cache = open(os.path.join(str(cachedir), self.filename), "w")
 
     def add(self, name, number):
         """Method that adds a name and number to the phonebook."""

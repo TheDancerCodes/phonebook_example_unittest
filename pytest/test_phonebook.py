@@ -4,12 +4,9 @@ import pytest
 from phonebook import Phonebook
 
 @pytest.fixture
-def phonebook(request):
-    """A function of the Resource of the Test Fixture."""
-    phonebook = Phonebook()
-    def cleanup_phonebook():
-        phonebook.clear()
-    request.addfinalizer(cleanup_phonebook)
+def phonebook(tmpdir):
+    """Function provides an empty Phonebook."""
+    phonebook = Phonebook(tmpdir)
     return phonebook
 
 def test_add_and_lookp_entry(phonebook):
