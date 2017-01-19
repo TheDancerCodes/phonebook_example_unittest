@@ -3,10 +3,22 @@
 class Phonebook():
     """Phonebook Class."""
 
+    def __init__(self):
+        """The constructor for the Phonebook class."""
+        self.entries = {}
+
     def add(self, name, number):
         """Method that adds a name and number to the phonebook."""
-        pass
+        self.entries[name] = number
 
     def lookup(self, name):
         """Method that looks up a name in the phonebook."""
-        pass
+        return self.entries[name]
+
+    def names(self):
+        """Method that looks up names in the phonebook."""
+        return self.entries.keys()
+
+    def numbers(self):
+        """Method that looks up numbers in the phonebook."""
+        return self.entries.values()
