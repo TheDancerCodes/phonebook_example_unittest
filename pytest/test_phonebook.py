@@ -3,10 +3,17 @@ import pytest
 
 from phonebook import Phonebook
 
-def test_add_and_lookp_entry():
-    """Test case that adds entry to phonebook & looks up an entry by name."""
-    # pytest.skip("WIP")
+@pytest.fixture
+def phonebook(request):
+    """A function of the Resource of the Test Fixture."""
     phonebook = Phonebook()
+    def cleanup_phonebook():
+        phonebook.clear()
+    request.addfinalizer(cleanup_phonebook)
+    return phonebook
+
+def test_add_and_lookp_entry(phonebook):
+    """Test case that adds entry to phonebook & looks up an entry by name."""
     phonebook.add("Bob", "123")
     assert "123" == phonebook.lookup("Bob")
 
@@ -18,16 +25,14 @@ def test_add_and_lookp_entry():
 #     assert "12345" in phonebook.numbers()
 
 # Checking two collections and comparing them against each other.
-def test_phonebook_gives_access_to_names_and_numbers():
+def test_phonebook_gives_access_to_names_and_numbers(phonebook):
     """Test case checking that you can access names & numbers in phonebook."""
-    phonebook = Phonebook()
     phonebook.add("Alice", "12345")
     phonebook.add("Bob", "123")
     assert set(phonebook.names()) == {"Alice", "Bob"}
     assert set(phonebook.numbers()) == {"12345", "123"}
 
-def test_missing_entry_raises_KeyError():
+def test_missing_entry_raises_KeyError(phonebook):
     """Test case that raises KeyError for a missng entry."""
-    phonebook = Phonebook()
     with pytest.raises(KeyError):
         phonebook.lookup("missing")
