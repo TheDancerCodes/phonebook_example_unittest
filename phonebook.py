@@ -19,3 +19,13 @@ class Phonebook:
     def is_consistent(self):
         """Method that ascertains whether the phone is consistent."""
         return True
+    #     if len(self.entries) == 0:
+    #         return True
+    #     else self.entries["Roger", "12345"]:
+    #         return True
+    #
+    # def get_names(self):
+    #     return "Sue"
+    #
+    # def get_numbers(self):
+    #     return "12345"

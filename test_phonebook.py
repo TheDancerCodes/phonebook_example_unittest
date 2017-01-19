@@ -59,5 +59,5 @@ class PhonebookTest(unittest.TestCase):
     def test_phonebook_add_names_and_numbers(self):
         """Test Case to check the names and numbers the phonebook contains."""
         self.phonebook.add("Sue", "12345")
-        self.assertIn("Sue", phonebook.get_names())
-        self.assertIn("12345", phonebook.get_numbers())
+        self.assertIn("Sue", self.phonebook.get_names())
+        self.assertIn("12345", self.phonebook.get_numbers())
